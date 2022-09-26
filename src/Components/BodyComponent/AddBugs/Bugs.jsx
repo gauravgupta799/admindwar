@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: "#3f51b5",
 		marginTop: "25px",
 		color: "white",
+    '&:hover':{
+			backgroundColor: "#3f41b5",
+		}
 	},
 	image: {
 		backgroundImage: "url(https://source.unsplash.com/random)",
@@ -64,6 +67,20 @@ const useStyles = makeStyles((theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
+  inputLabel: {
+    padding:"0 10px",
+   },
+  input:{
+		padding:"10px",
+		fontSize:"16px",
+		color:"#434141",
+		'&::placeholder':{
+			fontWeight:"540",
+			fontSize:"16px",
+      letterSpacing:"0.5px",
+			color:"rgba(0, 0, 0, 0.48)",
+		}
+  },
 }));
 
 
@@ -127,7 +144,9 @@ export default function Bugs() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <FormControl sx={{  minWidth: 400 }} className = {classes.form}>
-                  <InputLabel id="demo-simple-select-helper-label" >
+                  <InputLabel 
+                     className={classes.inputLabel}
+                    id="demo-simple-select-helper-label" >
                     Select Project's Name
                   </InputLabel>
                   <Select
@@ -147,7 +166,9 @@ export default function Bugs() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl sx={{ minWidth: 400 }} className = {classes.form}>
-                  <InputLabel id="demo-simple-select-helper-label" >
+                  <InputLabel
+                     className={classes.inputLabel}
+                    id="demo-simple-select-helper-label" >
                     Select Testcase's Id
                   </InputLabel>
                   <Select
@@ -170,6 +191,7 @@ export default function Bugs() {
                   aria-label="minimum height"
                   name='bugDetails'
                   minRows={3}
+                  className={classes.input}
                   placeholder="Bug's Description..."
                   style={{ width: 410, height: 300 }}
                   onChange={handleChange}

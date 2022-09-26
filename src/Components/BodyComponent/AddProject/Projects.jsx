@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: "#3f51b5",
 		marginTop: "25px",
 		color: "white",
+		'&:hover':{
+			backgroundColor: "#3f41b5",
+		}
 	},
 	image: {
 		backgroundImage: "url(https://source.unsplash.com/random)",
@@ -58,6 +61,17 @@ const useStyles = makeStyles((theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
+	input:{
+		padding:"10px",
+		fontSize:"16px",
+		color:"#434141",
+		'&::placeholder':{
+			fontWeight:"540",
+			fontSize:"16px",
+			letterSpacing:"0.5px",
+			color:"rgba(0, 0, 0, 0.54)",
+		}
+	}
 }));
 
 const Projects = () =>{
@@ -139,6 +153,7 @@ const Projects = () =>{
                                     name="description"
 									placeholder='Description...'
                                     variant='outlined'
+									className={classes.input}
 									style={{ width: 400, height: 240 }}
                                     onChange={handleChange}
 								/>
