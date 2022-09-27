@@ -18,7 +18,7 @@
     border: none;
     border-radius: 10px;
     padding: 5px 10px;
-    background-color: #3bb077;
+    background-color: #33d386;
     color: white;
     cursor: pointer;
     margin-right: 20px;
@@ -27,4 +27,26 @@
 .projectListDelete{
     color: red;
     cursor: pointer;
+}
+
+#updateBtn{
+    background-color: #3f51b5;
+    margin: 10px 0px;
+    color: white;
+}
+
+#updateBtn:hover{
+    background-color: #3f41b5;
+}
+
+#textArea{
+    font-size:16px;
+    padding: 10px 0px 0px 10px;
+    color:#434141;
+}
+#textArea::placeholder{
+    font-weight:500;
+    font-size:16px;
+    letter-spacing:0.5px;
+    color:rgba(0, 0, 0, 0.54);
 }

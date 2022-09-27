@@ -48,7 +48,7 @@ export default function UserOverviewComponent() {
           tension: 0.5,
         },
       ],
-      xAxislabels: ["Desktop", "Tablet", "Mobile"],
+      // xAxislabels: ["Desktop", "Tablet", "Mobile"],
     },
   ];
 

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,10 +14,10 @@ import Select from "@material-ui/core/Select";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 const url = "https://nodeexpmongoapi.herokuapp.com/api/user/addtestcase";
-const projectName = ["Testcase1","Testcase2","Testcase3","Testcase4"];
+const projectName = ["Testcase1", "Testcase2", "Testcase3", "Testcase4"];
 
 const useStyles = makeStyles((theme) => ({
 	container: {
@@ -32,17 +32,18 @@ const useStyles = makeStyles((theme) => ({
 		// marginTop: "50px",
 		backgroundColor: "white",
 		width: "600px",
-		padding: "0px 20px 15px 20px",
+		// padding: "0px 20px 15px 20px",
+		padding: "5px 20px",
 		borderRadius: "5px",
 		boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.35)",
 	},
 	button: {
 		backgroundColor: "#3f51b5",
-		marginTop: "25px",
+		margin: "20px 0px",
 		color: "white",
-    '&:hover':{
+		"&:hover": {
 			backgroundColor: "#3f41b5",
-		}
+		},
 	},
 	image: {
 		backgroundImage: "url(https://source.unsplash.com/random)",
@@ -65,25 +66,25 @@ const useStyles = makeStyles((theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
-  inputLabel: {
-   padding:"0px 10px",
-  },
-  input:{
-		padding:"10px",
-		fontSize:"16px",
-		color:"#434141",
-		'&::placeholder':{
-			fontWeight:"540",
-			fontSize:"16px",
-      letterSpacing:"0.5px",
-			color:"rgba(0, 0, 0, 0.54)",
-		}
-  }  
-}))
+	inputLabel: {
+		padding: "0px 10px",
+	},
+	input: {
+		padding: "10px",
+		fontSize: "16px",
+		color: "#434141",
+		"&::placeholder": {
+			fontWeight: "540",
+			fontSize: "16px",
+			letterSpacing: "0.5px",
+			color: "rgba(0, 0, 0, 0.54)",
+		},
+	},
+}));
 
 export default function TestCase() {
-    const classes = useStyles();
-    const [projectTestCase, setProjectTestCase] = useState({
+	const classes = useStyles();
+	const [projectTestCase, setProjectTestCase] = useState({
 		project_name: "",
 		testcase: "",
 		created_by: "Admin",
@@ -95,8 +96,12 @@ export default function TestCase() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-    // console.log("Testcase",projectTestCase);
-		if (projectTestCase.project_name === "" || projectTestCase.testcase === "" || projectTestCase.project_id === "") {
+		// console.log("Testcase",projectTestCase);
+		if (
+			projectTestCase.project_name === "" ||
+			projectTestCase.testcase === "" ||
+			projectTestCase.project_id === ""
+		) {
 			swal("Wrong", "All fiels are required", "error", {
 				button: true,
 				timer: 2000,
@@ -110,88 +115,92 @@ export default function TestCase() {
 				});
 				window.location = "/";
 			} catch (err) {
-        swal("Error", "Server Error", "error", {
-          button: false,
-          timer: 2000,
-        });
+				swal("Error", "Server Error", "error", {
+					button: false,
+					timer: 2000,
+				});
 				console.log(err);
 			}
 		}
 	};
 
-  return (
-    <Container className = {classes.container}>
-      <Container component="main" maxWidth="xs"    className = {classes.root}>
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }} className = {classes.avatar}>
-           <PostAddIcon />
-          </Avatar>
-          <Typography component="h1" variant="h4">
-            Add Testcase
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-         
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <FormControl sx={{ m: 1, minWidth: 400 }} className = {classes.form}>
-                  <InputLabel 
-                  className={classes.inputLabel}
-                   id="demo-simple-select-helper-label" 
-                   >
-                    Project's Name
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    name = "project_name" 
-                    variant='outlined'
-                    label="Select Project's Name"
-                    onChange={handleChange}
-                  >
-                  { projectName.map((item)=>{
-                            return  <MenuItem value={item}>{item}</MenuItem>
-                        })
-                  }
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <TextareaAutosize
-                  aria-label="minimum height"
-                  name='testcase'
-                  minRows={3}
-                  placeholder="Description..."
-                  className={classes.input}
-                  style={{ width: 410, height: 300 }}
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              className = {classes.button}
-            >
-              Add
-            </Button>
-          </Box>
-        </Box>
-      </Container>
-    </Container>
-  );
+	return (
+		<Container className={classes.container}>
+			<Container component='main' maxWidth='xs' className={classes.root}>
+				<CssBaseline />
+				<Box
+					sx={{
+						marginTop: 8,
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+					}}
+				>
+					<Avatar
+						sx={{ m: 1, bgcolor: "secondary.main" }}
+						className={classes.avatar}
+					>
+						<PostAddIcon />
+					</Avatar>
+					<Typography component='h1' variant='h4'>
+						Add Testcase
+					</Typography>
+					<Box
+						component='form'
+						noValidate
+						onSubmit={handleSubmit}
+						sx={{ mt: 3 }}
+					>
+						<Grid container spacing={2}>
+							<Grid item xs={12}>
+								<FormControl
+									sx={{ m: 1, minWidth: 400 }}
+									className={classes.form}
+								>
+									<InputLabel
+										className={classes.inputLabel}
+										id='demo-simple-select-helper-label'
+									>
+										Project's Name
+									</InputLabel>
+									<Select
+										labelId='demo-simple-select-helper-label'
+										id='demo-simple-select-helper'
+										name='project_name'
+										variant='outlined'
+										label="Select Project's Name"
+										onChange={handleChange}
+									>
+										{projectName.map((item) => {
+											return <MenuItem value={item}>{item}</MenuItem>;
+										})}
+									</Select>
+								</FormControl>
+							</Grid>
+							<Grid item xs={12}>
+								<TextareaAutosize
+									aria-label='minimum height'
+									name='testcase'
+									minRows={3}
+									placeholder='Description...'
+									className={classes.input}
+									style={{ width: 400, height: 240 }}
+									onChange={handleChange}
+								/>
+							</Grid>
+						</Grid>
+						<Button
+							type='submit'
+							fullWidth
+							variant='contained'
+							sx={{ mt: 3, mb: 2 }}
+							className={classes.button}
+						>
+							Add
+						</Button>
+					</Box>
+				</Box>
+			</Container>
+		</Container>
+	);
 }
