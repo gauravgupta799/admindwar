@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,7 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
-// import { useHistory } from "react-router-dom";
+// import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,53 +38,57 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-async function loginUser(credentials) {
-    return fetch('https://nodeexpmongoapi.herokuapp.com/api/user/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-    .then(data => data.json())
-}
+// const url = "https://nodeexpmongoapi.herokuapp.com/api/user/login";
 
 export default function Signin() {
-    const classes = useStyles();
-    // const history = useHistory();
+    const classes = useStyles(); 
+    const [loading , setLoading] = useState(false);
     const [email, setUserName] = useState();
-    const [password, setPassword] = useState();
-
+    const [password, setPassword] = useState( );
+     
+    async function loginUser(credentials) {
+        return fetch('https://nodeexpmongoapi.herokuapp.com/api/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials)
+        })
+        .then(data => data.json())
+    }
+   
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await loginUser({email,password});
-
+         const response = await loginUser({email,password});
+       
             if ('accessToken' in response) {
                 swal("Success", response.message, "success", {
                     buttons: false,
                     timer: 2000,
                 })
-                    .then((value) => {
-                        localStorage.setItem('accessToken', response['accessToken']);
-                        if (response['role'] === "Admin") {
-                            localStorage.setItem('role', 1);
-                        }
-
-                        if (response['role'] === "Tester") {
-                            localStorage.setItem('role', 0);
-                        }
-                        localStorage.setItem('user', JSON.stringify(email));
-                        window.location.href= "/";
-                    });
-            } else {
-                swal("Failed", response.message, "error");
+                .then((value) => {
+                    localStorage.setItem('accessToken', response['accessToken']);
+                    if (response['role'] === "Admin") {
+                        localStorage.setItem('role', 1);
+                    }
+    
+                    if (response['role'] === "Tester") {
+                        localStorage.setItem('role', 0);
+                    }
+                    setLoading(true);
+                    localStorage.setItem('user', JSON.stringify(email));
+                    window.location.href= "/";
+                });
+            }else {
+                swal("Failed", response.message, "error" ,{button:false,timer:2000});
             }
+
     }
 
     return (
         <Grid container className={classes.root}>
             <CssBaseline />
-            <Grid item xs={false} md={7} className={classes.image} />
+                <Grid item xs={false} md={7} className={classes.image} />
             <Grid item xs={12} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
